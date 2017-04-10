@@ -1,0 +1,4 @@
+<h1>使用微信扫码支付</h1>
+<div>
+  <%= link_to("已经支付完成",pay_with_wechat_order_path(@order.token),method: :post ,class: "btn btn-danger") %>
+</div>

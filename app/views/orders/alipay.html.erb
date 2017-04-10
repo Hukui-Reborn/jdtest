@@ -1,0 +1,4 @@
+<h1>使用支付宝扫码</h1>
+<div>
+  <%= link_to("已经支付完成",pay_with_alipay_order_path(@order.token),method: :post ,class: "btn btn-danger") %>
+</div>
