@@ -22,5 +22,13 @@
         已销售一空，无法购买
       <% end %>
     </div>
+    <div class="pull-right">
+      <% if current_user && current_user.is_collector_of?(@product)%>
+      <%= link_to("取消收藏",remove_product_path(@product),method: :post, class:"btn btn-danger btn-sm",style:"margin-right:20px;")%>
+
+      <% else %>
+      <%= link_to("加入收藏",collect_product_path(@product),method: :post, class:"btn btn-success btn-sm ",style:"margin-right:20px;")%>
+      <% end %>
+    </div>
   </div>
 </div>
