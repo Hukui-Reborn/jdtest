@@ -1,0 +1,49 @@
+
+    <table class="table table-hover">
+   <thead>
+     <tr>
+
+     <td width="20%">
+       商品名称
+     </td>
+     <td width="20%">
+       单价
+     </td>
+     <td width="25%">
+       数量
+     </td>
+     <td >
+       展示图
+     </td>
+     </tr>
+   </thead>
+   <tbody>
+  <% @collections.each do |collection|%>
+  <tr>
+
+
+    <td>
+      <%=link_to(collection.title,product_path(collection))%>
+    </td>
+    <td>
+      ￥<%= collection.price%>
+    </td>
+    <td>
+      <%= collection.quantity %>
+    </td>
+    <td>
+
+      <%= link_to product_path(collection) do %>
+        <% if collection.image.present? %>
+          <%= image_tag(collection.image.thumb.url,class:"thumbnail") %>
+        <% else %>
+          <%= image_tag("http://placehold.it/200x200&text=No Pic",class:"thumbnail") %>
+        <% end %>
+      <% end %>
+
+
+  <% end %>
+  </td>
+    </tr>
+  </tbody>
+</table>
