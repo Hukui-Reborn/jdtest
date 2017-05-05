@@ -30,5 +30,26 @@
       <%= link_to("加入收藏",collect_product_path(@product),method: :post, class:"btn btn-success btn-sm ",style:"margin-right:20px;")%>
       <% end %>
     </div>
+
+     <br />
+    <div class="upvote">
+      <%= link_to upvote_product_path(@product), method: :post do %>
+      <div class="pi-thumbs-up">
+      赞: <i class="fa fa-thumbs-up fa-lg" , style="color:#ff5722;"></i>
+
+       <%= @product.goods_voters.count %>
+        </div>
+       <% end %>
+    </div>
+    <div class="downvote">
+     <%= link_to downvote_product_path(@product), method: :post do %>
+     <div class="pi-thumbs-down">
+      踩: <i class="fa fa-thumbs-down fa-lg" , style="color:#ff5722;"></i>
+      <%= @product.goods_antis.count %>
+
+       </div>
+      <% end %>
+      </div>
+
   </div>
 </div>
