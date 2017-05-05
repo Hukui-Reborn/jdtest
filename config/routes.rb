@@ -19,6 +19,8 @@ Rails.application.routes.draw do
       post :add_to_cart
       post :collect
       post :remove
+      post :upvote
+      post :downvote
     end
   end
 
@@ -45,7 +47,7 @@ Rails.application.routes.draw do
     resources :orders
   end
 
-  resources :goods_collections 
+  resources :goods_collections
 
 
 

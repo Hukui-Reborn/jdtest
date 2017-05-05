@@ -1,5 +1,30 @@
 class ProductsController < ApplicationController
- before_action :authenticate_user!, only:[:collect, :remove]
+ before_action :authenticate_user!, only:[:collect, :remove,:add_to_cart,:upvote, :downvote]
+
+
+  def upvote
+    @product = Product.find(params[:id])
+    if !current_user.is_voter_of?(@product)
+      current_user.like!(@product)
+      flash[:notice]= "您已点赞了该商品"
+    else
+      flash[:warning]= "您已点赞过该商品，无法重复点赞"
+    end
+    redirect_to :back
+  end
+
+  def downvote
+    @product = Product.find(params[:id])
+    if !current_user.is_anti_of?(@product)
+      current_user.dislike!(@product)
+      flash[:notice]= "您已踩了该商品"
+    else
+      flash[:warning]= "您已踩过该商品，无法重复踩它"
+    end
+    redirect_to :back
+
+  end
+
 
   def collect
     @product = Product.find(params[:id])
@@ -25,7 +50,7 @@ class ProductsController < ApplicationController
 
   end
 
-  
+
 
 
 
