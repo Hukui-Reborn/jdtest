@@ -1,6 +1,13 @@
 class ProductsController < ApplicationController
- before_action :authenticate_user!, only:[:collect, :remove,:add_to_cart,:upvote, :downvote]
+  before_action :authenticate_user!, only:[:collect, :remove,:add_to_cart,:upvote, :downvote]
+  before_action :validate_search_key, only:[:search]
 
+  def search
+    if @query_string.present?
+      search_result = Product.ransack(@search_criteria).result(:distinct => true)
+      @products = search_result.paginate(:page => params[:page], :per_page => 5)
+    end
+  end
 
   def upvote
     @product = Product.find(params[:id])
@@ -41,19 +48,14 @@ class ProductsController < ApplicationController
   def remove
     @product = Product.find(params[:id])
     if current_user.is_collector_of?(@product)
-     current_user.remove!(@product)
-     flash[:alert]= "已取消收藏该商品"
-   else
-     flash[:warning]= "您未收藏该商品,无法取消收藏"
-   end
-   redirect_to product_path(@product)
+      current_user.remove!(@product)
+      flash[:alert]= "已取消收藏该商品"
+    else
+      flash[:warning]= "您未收藏该商品,无法取消收藏"
+    end
+    redirect_to product_path(@product)
 
   end
-
-
-
-
-
 
   def index
     @products = Product.all
@@ -72,5 +74,17 @@ class ProductsController < ApplicationController
       flash[:warning] = "你的购物车内已有此商品"
     end
     redirect_to :back
+  end
+
+  protected
+
+  def validate_search_key
+    @query_string = params[:q].gsub(/\\|\'|\/|\?/, "") if params[:q].present?
+    @search_criteria = search_criteria(@query_string)
+  end
+
+
+  def search_criteria(query_string)
+    { :title_cont => query_string }
   end
 end
