@@ -7,11 +7,21 @@
       <ul class="nav navbar-nav">
         <li class="active"><%= link_to("Products",products_path) %></li>
       </ul>
+        <div class="fl ml40 mt10">
+          <div class="search clearfix ">
+            <%= form_tag search_products_path , :method => :get  do %>
+              <input class="search-input fl w300" type="text" class="form-control" name="q" value="<%= params[:q] %>" placeholder="输入产品信息">
+              <div class="input-group-btn">
+                <button type="submit" class="search-button pa tc"><i class="fa fa-search col-red"></i></button>
+              </div>
+            <% end %>
+          </div>
+        </div>
       <ul class="nav navbar-nav navbar-right">
         <li>
-            <%= link_to carts_path  do %>
-              购物车 <i class="fa fa-shopping-cart"> </i>(<%= current_cart.products.count %>)
-            <% end %>
+          <%= link_to carts_path  do %>
+            购物车 <i class="fa fa-shopping-cart"> </i>(<%= current_cart.products.count %>)
+          <% end %>
         </li>
         <% if !current_user %>
           <li><%= link_to("注册",new_user_registration_path) %></li>
@@ -32,7 +42,7 @@
                 <%= link_to("我的收藏",goods_collections_path)%>
               </li>
               <li>
-               <%= link_to("个人订单列表",account_orders_path) %>
+                <%= link_to("个人订单列表",account_orders_path) %>
               </li>
               <li><%= link_to(content_tag(:i,'登出',class:'fa fa-sign-out'),destroy_user_session_path, method: :delete) %></li>
             </ul>

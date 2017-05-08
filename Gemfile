@@ -39,6 +39,9 @@ gem 'aasm'
 gem 'figaro'
 gem 'fog-aws'
 gem 'rollbar'
+gem 'ransack'
+gem 'will_paginate'
+gem 'will_paginate-bootstrap'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
