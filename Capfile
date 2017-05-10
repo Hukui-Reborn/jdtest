@@ -1,5 +1,7 @@
 # Load DSL and set up stages
 require "capistrano/setup"
+require "capistrano/rails"
+require "capistrano/rails/db"
 
 # Include default deployment tasks
 require "capistrano/deploy"

@@ -50,6 +50,7 @@ group :devlopment do
   gem "capistrano", "~> 3.4"
   gem "capistrano-rvm"
   gem "capistrano-rails"
+  gem "capistrano-rails-db"
 end
 
 group :development do
