@@ -11,4 +11,11 @@ u.password = "111111"
 u.password_confirmation = "111111"
 u.is_admin = true
 u.save
+u = User.new
+u.email = "1@test.com"
+u.password = "111111"
+u.password_confirmation = "111111"
+u.is_admin = false
+u.save
+
 
